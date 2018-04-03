@@ -39,11 +39,14 @@ module.exports = function JaegerBomb(options) {
       [`${serviceName}.version`]: serviceVersion
     }
   }
-
   const jaegerConfig = defaultsDeep({}, jaegerDefaultConfig, conf)
   const jaegerOptions = defaultsDeep({}, jaegerDefaultOptions, opts)
+  console.log('conf')
+  console.log(JSON.stringify(jaegerDefaultConfig))
+  console.log('opts')
+  console.log(JSON.stringify(jaegerDefaultOptions))
   const tracer = Tracer(jaegerConfig, jaegerOptions)
-
+  
   seneca.inward(jaegerInward)
   seneca.outward(jaegerOutward)
 
